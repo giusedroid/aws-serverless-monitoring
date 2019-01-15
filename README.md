@@ -18,4 +18,3 @@ This package depends of your AWS account to have the following resources availab
 Can't be bothered? Feel free to grab this [VPC](https://github.com/giusedroid/aws-vpc-blueprint)
 
 ## Exports
-
