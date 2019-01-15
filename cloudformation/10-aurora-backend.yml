@@ -19,10 +19,10 @@ Parameters:
     NoEcho: true
   GrafanaDatabaseMinCapacity:
     Type: 'Number'
-    Default: 1
+    Default: 2
   GrafanaDatabaseMaxCapacity:
     Type: 'Number'
-    Default: 2
+    Default: 3
 
 Resources:
   DBSubnetGroup:
