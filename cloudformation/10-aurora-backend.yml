@@ -22,7 +22,7 @@ Parameters:
     Default: 2
   GrafanaDatabaseMaxCapacity:
     Type: 'Number'
-    Default: 3
+    Default: 4
 
 Resources:
   DBSubnetGroup:
