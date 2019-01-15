@@ -28,7 +28,7 @@ backend-local:
 	--capabilities CAPABILITY_NAMED_IAM \
 	--parameter-overrides \
 	Environment=local \
-	DatabaseAZs=eu-west-1a,eu-west-1b,eu-west-1c \
+	DatabaseAZs=eu-west-1a,eu-west-1b \
 	GrafanaDatabaseName=local-grafana-backend \
 	GrafanaDatabaseUser=local-grafana-user \
 	GrafanaDatabasePassword=$(GRAFANA_DATABASE_PASSWORD) \
