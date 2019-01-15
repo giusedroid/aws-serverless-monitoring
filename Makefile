@@ -13,7 +13,7 @@ backend:
 	--parameter-overrides \
 	Environment=$(DEPLOY_ENV) \
 	DatabaseAZs=eu-west-1a,eu-west-1b \
-	GrafanaDatabaseName=$(DEPLOY_ENV)-grafana-backend \
+	GrafanaDatabaseName=grafana \
 	GrafanaDatabaseUser=$(DEPLOY_ENV)-grafana-user \
 	GrafanaDatabasePassword=$(GRAFANA_DATABASE_PASSWORD) \
 	--no-fail-on-empty-changeset
@@ -29,7 +29,7 @@ backend-local:
 	--parameter-overrides \
 	Environment=local \
 	DatabaseAZs=eu-west-1a,eu-west-1b \
-	GrafanaDatabaseName=local-grafana-backend \
+	GrafanaDatabaseName=localgrafana \
 	GrafanaDatabaseUser=local-grafana-user \
 	GrafanaDatabasePassword=$(GRAFANA_DATABASE_PASSWORD) \
 	--no-fail-on-empty-changeset
