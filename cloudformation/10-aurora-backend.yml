@@ -33,10 +33,7 @@ Resources:
       SubnetIds:
         Fn::Split: 
           - ','
-          - Fn::ImportValue:
-            !Sub ${Environment}-data-subnets
-      Tags:
-        - Resource Tag 
+          - Fn::ImportValue: !Sub ${Environment}-data-subnets
 
   RDSCluster:
     Type: AWS::RDS::DBCluster
