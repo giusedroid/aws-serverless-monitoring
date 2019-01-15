@@ -1,0 +1,5 @@
+.vscode
+script/bin
+script/lib
+script/include
+script/.Python

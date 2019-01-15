@@ -1,0 +1,19 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: 'Provisions HA Grafana Security and Exports'
+
+Parameters:
+  Environment:
+    Type: String
+  
+
+Resources:
+  GrafanaServiceSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub "${Environment}-sg-grafana"
+      GroupDescription: "Grafana Service Security Group"
+      VpcId: Fn::ImportValue: !Sub ${Environment}-vpc
+  
+

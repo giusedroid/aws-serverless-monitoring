@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/aws-serverless-monitoring
+    docker:
+      - image: circleci/python:3.7.1
+    
+    steps:
+      - checkout
+      - run:
+        name: Install dependencies
+        command: |
+          sudo pip install awscli
+
+      # - run:
+      #   name: Deploy Security and Exports Stack
+      #   command: make security
+
+      # - run:
+      #   name: Deploy Aurora Backend
+      #   command: make backend
+
+      # - run:
+      #   name: Deploy Grafana Service
+      #   command: make service
+
+      # - run:
+      #   name: Deploy Timestream
+      #   command: make timestream
+
+      # - run:
+      #   name: Deploy DNS Entries
+      #   command: make dns
+      
+      # - run:
+      #   name: Integrity Test
+      #   command: make test

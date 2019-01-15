@@ -1,0 +1,77 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: 'Provisions Aurora Backend for Grafana HA'
+
+Parameters:
+
+  Environment:
+    Type: 'String'
+  DatabaseAZs:
+    Type: String
+
+  GrafanaDatabaseName:
+    Type: 'String'
+  GrafanaDatabaseUser:
+    Type: 'String'
+  GrafanaDatabasePassword:
+    Type: 'String'
+    NoEcho: true
+  GrafanaDatabaseMinCapacity:
+    Type: 'Integer'
+    Default: 1
+  GrafanaDatabaseMaxCapacity:
+    Type: 'Integer'
+    Default: 2
+
+Resources:
+  RDSCluster:
+    Type: AWS::RDS::DBCluster
+    Properties:
+      MasterUsername: 
+        Ref: GrafanaDatabaseUser
+      MasterUserPassword: 
+        Ref: GrafanaDatabasePassword
+      DatabaseName:
+        Ref: GrafanaDatabaseName
+      Engine: aurora
+      EngineMode: serverless
+      BackupRetentionPeriod: 14
+      DBClusterIdentifier: !Sub ${Environment}-grafana-service-aurora-backend
+      DeletionProtection: true
+      EnableIAMDatabaseAuthentication: true
+      AvailabilityZones:
+        Fn::Split:
+          - ','
+          - !Ref DatabaseAZs
+      ScalingConfiguration:
+        AutoPause: true
+        MaxCapacity:
+          Ref: GrafanaDatabaseMaxCapacity
+        MinCapacity:
+          Ref: GrafanaDatabaseMinCapacity
+        SecondsUntilAutoPause: 300
+        
+  Outputs:
+    ClusterEndpoint:
+      Value: !GetAtt 'RDSCluster.Endpoint.Address'
+      Export:
+        Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'endpoint']]
+    ClusterReadEndpoint:
+      Value: !GetAtt 'RDSCluster.ReadEndpoint.Address'
+      Export:
+        Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'read','endpoint']]
+    ClusterPort:
+      Value: !GetAtt 'RDSCluster.Endpoint.Port'
+      Export:
+        Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'port']]
+    DatabaseName:
+      Value: !Ref GrafanaDatabaseName
+      Export:
+        Name: !Join ['-', [!Ref Environment, 'grafana', 'database', 'name']]
+    DatabaseUser:
+      Value: !Ref GrafanaDatabaseUser
+      Export:
+        Name: !Join ['-', [!Ref Environment, 'grafana', 'database', 'user']]
+
+      
