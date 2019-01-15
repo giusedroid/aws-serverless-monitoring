@@ -14,7 +14,7 @@ backend:
 	Environment=$(DEPLOY_ENV) \
 	DatabaseAZs=eu-west-1a,eu-west-1b \
 	GrafanaDatabaseName=grafana \
-	GrafanaDatabaseUser=$(DEPLOY_ENV)-grafana-user \
+	GrafanaDatabaseUser=grafanauser \
 	GrafanaDatabasePassword=$(GRAFANA_DATABASE_PASSWORD) \
 	--no-fail-on-empty-changeset
 
@@ -30,6 +30,6 @@ backend-local:
 	Environment=local \
 	DatabaseAZs=eu-west-1a,eu-west-1b \
 	GrafanaDatabaseName=localgrafana \
-	GrafanaDatabaseUser=local-grafana-user \
+	GrafanaDatabaseUser=localgrafanauser \
 	GrafanaDatabasePassword=$(GRAFANA_DATABASE_PASSWORD) \
 	--no-fail-on-empty-changeset
