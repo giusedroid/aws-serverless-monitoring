@@ -12,7 +12,7 @@ backend:
 	--capabilities CAPABILITY_NAMED_IAM \
 	--parameter-overrides \
 	Environment=$(DEPLOY_ENV) \
-	DatabaseAZs=eu-west-1a,eu-west-1b,eu-west-1c \
+	DatabaseAZs=eu-west-1a,eu-west-1b \
 	GrafanaDatabaseName=$(DEPLOY_ENV)-grafana-backend \
 	GrafanaDatabaseUser=$(DEPLOY_ENV)-grafana-user \
 	GrafanaDatabasePassword=$(GRAFANA_DATABASE_PASSWORD) \
