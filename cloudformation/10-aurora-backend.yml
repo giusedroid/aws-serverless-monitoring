@@ -52,26 +52,26 @@ Resources:
           Ref: GrafanaDatabaseMinCapacity
         SecondsUntilAutoPause: 300
 
-  Outputs:
-    ClusterEndpoint:
-      Value: !GetAtt 'RDSCluster.Endpoint.Address'
-      Export:
-        Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'endpoint']]
-    ClusterReadEndpoint:
-      Value: !GetAtt 'RDSCluster.ReadEndpoint.Address'
-      Export:
-        Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'read','endpoint']]
-    ClusterPort:
-      Value: !GetAtt 'RDSCluster.Endpoint.Port'
-      Export:
-        Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'port']]
-    DatabaseName:
-      Value: !Ref GrafanaDatabaseName
-      Export:
-        Name: !Join ['-', [!Ref Environment, 'grafana', 'database', 'name']]
-    DatabaseUser:
-      Value: !Ref GrafanaDatabaseUser
-      Export:
-        Name: !Join ['-', [!Ref Environment, 'grafana', 'database', 'user']]
+Outputs:
+  ClusterEndpoint:
+    Value: !GetAtt 'RDSCluster.Endpoint.Address'
+    Export:
+      Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'endpoint']]
+  ClusterReadEndpoint:
+    Value: !GetAtt 'RDSCluster.ReadEndpoint.Address'
+    Export:
+      Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'read','endpoint']]
+  ClusterPort:
+    Value: !GetAtt 'RDSCluster.Endpoint.Port'
+    Export:
+      Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'port']]
+  DatabaseName:
+    Value: !Ref GrafanaDatabaseName
+    Export:
+      Name: !Join ['-', [!Ref Environment, 'grafana', 'database', 'name']]
+  DatabaseUser:
+    Value: !Ref GrafanaDatabaseUser
+    Export:
+      Name: !Join ['-', [!Ref Environment, 'grafana', 'database', 'user']]
 
       
