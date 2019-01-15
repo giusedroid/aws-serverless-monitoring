@@ -49,7 +49,6 @@ Resources:
       BackupRetentionPeriod: 14
       DBClusterIdentifier: !Sub ${Environment}-grafana-service-aurora-backend
       DeletionProtection: true
-      EnableIAMDatabaseAuthentication: true
       DBSubnetGroupName: !Ref DBSubnetGroup
       AvailabilityZones:
         Fn::Split:
