@@ -1,5 +1,7 @@
 # aws-serverless-monitoring
 
+[![CircleCI](https://circleci.com/gh/giusedroid/aws-vpc-blueprint.svg?style=svg)](https://circleci.com/gh/giusedroid/aws-vpc-blueprint)
+
 Aiming at building a serverless monitoring stack on AWS. Stay tuned.
 
 ## Imports

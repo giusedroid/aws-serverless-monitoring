@@ -16,9 +16,9 @@ jobs:
       #     name: Deploy Security and Exports Stack
       #     command: make security
 
-      # - run:
-      #     name: Deploy Aurora Backend
-      #     command: make backend
+      - run:
+          name: Deploy Aurora Backend
+          command: make backend
 
       # - run:
       #     name: Deploy Grafana Service
