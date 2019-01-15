@@ -25,6 +25,19 @@ Parameters:
     Default: 2
 
 Resources:
+  DBSubnetGroup:
+    Type: "AWS::RDS::DBSubnetGroup"
+    Properties: 
+      DBSubnetGroupDescription: "Data Subnet Group"
+      DBSubnetGroupName: !Sub ${Environment}-grafana-db-subnet-group
+      SubnetIds:
+        Fn::Split: 
+          - ','
+          - Fn::ImportValue:
+            !Sub ${Environment}-data-subnets
+      Tags:
+        - Resource Tag 
+
   RDSCluster:
     Type: AWS::RDS::DBCluster
     Properties:
@@ -40,6 +53,7 @@ Resources:
       DBClusterIdentifier: !Sub ${Environment}-grafana-service-aurora-backend
       DeletionProtection: true
       EnableIAMDatabaseAuthentication: true
+      DBSubnetGroupName: !Ref DBSubnetGroup
       AvailabilityZones:
         Fn::Split:
           - ','
