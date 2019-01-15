@@ -18,10 +18,10 @@ Parameters:
     Type: 'String'
     NoEcho: true
   GrafanaDatabaseMinCapacity:
-    Type: 'Integer'
+    Type: 'Number'
     Default: 1
   GrafanaDatabaseMaxCapacity:
-    Type: 'Integer'
+    Type: 'Number'
     Default: 2
 
 Resources:
@@ -51,7 +51,7 @@ Resources:
         MinCapacity:
           Ref: GrafanaDatabaseMinCapacity
         SecondsUntilAutoPause: 300
-        
+
   Outputs:
     ClusterEndpoint:
       Value: !GetAtt 'RDSCluster.Endpoint.Address'
