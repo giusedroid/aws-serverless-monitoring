@@ -8,30 +8,30 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install dependencies
-        command: |
-          sudo pip install awscli
+          name: Install dependencies
+          command: |
+            sudo pip install awscli
 
       # - run:
-      #   name: Deploy Security and Exports Stack
-      #   command: make security
+      #     name: Deploy Security and Exports Stack
+      #     command: make security
 
       # - run:
-      #   name: Deploy Aurora Backend
-      #   command: make backend
+      #     name: Deploy Aurora Backend
+      #     command: make backend
 
       # - run:
-      #   name: Deploy Grafana Service
-      #   command: make service
+      #     name: Deploy Grafana Service
+      #     command: make service
 
       # - run:
-      #   name: Deploy Timestream
-      #   command: make timestream
+      #     name: Deploy Timestream
+      #     command: make timestream
 
       # - run:
-      #   name: Deploy DNS Entries
-      #   command: make dns
+      #     name: Deploy DNS Entries
+      #     command: make dns
       
       # - run:
-      #   name: Integrity Test
-      #   command: make test
+      #     name: Integrity Test
+      #     command: make test
