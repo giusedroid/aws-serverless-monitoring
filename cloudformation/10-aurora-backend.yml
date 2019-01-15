@@ -67,10 +67,6 @@ Outputs:
     Value: !GetAtt 'RDSCluster.Endpoint.Address'
     Export:
       Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'endpoint']]
-  ClusterReadEndpoint:
-    Value: !GetAtt 'RDSCluster.ReadEndpoint.Address'
-    Export:
-      Name: !Join ['-', [!Ref Environment, 'grafana', 'service', 'aurora', 'backend', 'read','endpoint']]
   ClusterPort:
     Value: !GetAtt 'RDSCluster.Endpoint.Port'
     Export:
