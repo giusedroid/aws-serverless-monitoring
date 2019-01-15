@@ -22,7 +22,7 @@ jobs:
 
       # - run:
       #     name: Deploy Grafana Service
-      #     command: make service
+      #     command: make grafana
 
       # - run:
       #     name: Deploy Timestream

@@ -36,8 +36,9 @@ Parameters:
     Type: 'String'
     NoEcho: true
 
-  GrafanaDatabaseSecurityGroupId:
-    Type: 'String'
+  # this should be imported I guess...
+  # GrafanaDatabaseSecurityGroupId:
+  #   Type: 'String'
   
   GrafanaServiceAdminUser:
     Type: 'String'
@@ -109,8 +110,7 @@ Resources:
       Subnets: 
         Fn::Split: 
           - ','
-          - Fn::ImportValue:
-            !Sub ${Environment}-public-subnets
+          - Fn::ImportValue: !Sub ${Environment}-public-subnets
       SecurityGroups:
         - !Ref 'LoadBalancerSecurityGroup'
 
@@ -278,8 +278,7 @@ Resources:
           Subnets:
             Fn::Split: 
               - ','
-              - Fn::ImportValue:
-                !Sub ${Environment}-private-subnets
+              - Fn::ImportValue: !Sub ${Environment}-private-subnets
       TaskDefinition: !Ref TaskDefinition
       LoadBalancers:
         - ContainerName: 'grafana'
