@@ -110,3 +110,11 @@ dns-aurora:
 	DomainName=grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN) \
 	--no-fail-on-empty-changeset
 
+security:
+	echo "Deploying Security and Core Exports on $(DEPLOY_ENV)"
+	@aws cloudformation deploy \
+	--stack-name $(DEPLOY_ENV)-grafana-security \
+	--template-file cloudformation/00-security-and-exports.yml \
+	--parameter-overrides \
+	Environment=$(DEPLOY_ENV) \
+	--no-fail-on-empty-changeset

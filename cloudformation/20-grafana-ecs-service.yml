@@ -275,6 +275,7 @@ Resources:
           AssignPublicIp: 'ENABLED'
           SecurityGroups:
             - !Ref FargateSecurityGroup
+            - Fn::ImportValue: !Sub ${Environment}-grafana-sg-id
           Subnets:
             Fn::Split: 
               - ','
@@ -442,7 +443,17 @@ Resources:
                   - 'ec2:DescribeInstances'
                 Resource: '*'
 
-# note to self: probably you want to lockdown the database here
+  # opening a rule for fargate to poke aurora
+  GrafanaDBSecurityGroupIngress:
+    Type: 'AWS::EC2::SecurityGroupIngress'
+    Properties:
+      Description: !Sub 'Ingress from Fargate containers (${Environment})'
+      GroupId: 
+        Fn::ImportValue: !Sub '${Environment}-grafana-database-sg-id'
+      IpProtocol: 'tcp'
+      FromPort: 3306 # TODO: import this
+      ToPort: 3306 # TODO: import this
+      SourceSecurityGroupId: !Ref 'FargateSecurityGroup'
 
 Outputs:
   DNSName: 
