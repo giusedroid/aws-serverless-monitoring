@@ -49,7 +49,7 @@ grafana:
 	GrafanaImage=grafana/grafana:5.4.3 \
 	GrafanaServiceDomain=grafana-$(DEPLOY_ENV).$(GRAFANA_DOMAIN) \
 	GrafanaDatabaseEngine=mysql \
-	GrafanaSessionProviderString=grafanauser:$(GRAFANA_DATABASE_PASSWORD)@tcp(grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN):$(GRAFANA_DATABASE_PORT))/grafana \
+	GrafanaSessionProviderString=grafanauser:$(GRAFANA_DATABASE_PASSWORD)\@tcp\(grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN):$(GRAFANA_DATABASE_PORT)\)/grafana \
 	GrafanaDatabaseHost=grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN):$(GRAFANA_DATABASE_PORT) \
 	GrafanaDatabaseName=grafana \
 	GrafanaDatabaseUser=grafanauser \
