@@ -14,8 +14,7 @@ Resources:
     Properties:
       GroupName: !Sub "${Environment}-sg-grafana"
       GroupDescription: "Grafana Service Security Group (${Environment})"
-      VpcId:
-        Fn::ImportValue: !Sub ${Environment}-vpc
+      VpcId: !ImportValue !Sub ${Environment}-vpc
 
 Outputs:
   SecurityGroupId:
