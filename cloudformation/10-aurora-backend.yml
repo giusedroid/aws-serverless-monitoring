@@ -61,7 +61,8 @@ Resources:
         MinCapacity:
           Ref: GrafanaDatabaseMinCapacity
         SecondsUntilAutoPause: 300
-      VpcSecurityGroupsIds: !Ref GrafanaDBSecurityGroup
+      VpcSecurityGroupIds: 
+        - !Ref GrafanaDBSecurityGroup
 
   GrafanaDBSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
