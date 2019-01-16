@@ -10,10 +10,15 @@ Parameters:
 
 Resources:
   GrafanaServiceSG:
-    Type: AWS::EC2::SecurityGroup
+    Type: 'AWS::EC2::SecurityGroup'
     Properties:
-      GroupName: !Sub "${Environment}-sg-grafana"
-      GroupDescription: "Grafana Service Security Group"
-      VpcId: Fn::ImportValue: !Sub ${Environment}-vpc
-  
+      GroupDescription: !Sub 'Grafana database security group (${Environment})'
+      VpcId: 
+        Fn::ImportValue:
+          Fn::Sub: ${Environment}-vpc
 
+Outputs:
+  SecurityGroupId:
+    Export:
+      Name: !Sub ${Environment}-grafana-sg-id
+    Value: !GetAtt GrafanaServiceSG.GroupId

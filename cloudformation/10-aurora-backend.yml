@@ -61,6 +61,16 @@ Resources:
         MinCapacity:
           Ref: GrafanaDatabaseMinCapacity
         SecondsUntilAutoPause: 300
+      VpcSecurityGroupIds: 
+        - !Ref GrafanaDBSecurityGroup
+
+  GrafanaDBSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: !Sub 'Grafana database security group (${Environment})'
+      VpcId:
+        Fn::ImportValue:
+          Fn::Sub: ${Environment}-vpc
 
 Outputs:
   ClusterEndpoint:
@@ -79,5 +89,9 @@ Outputs:
     Value: !Ref GrafanaDatabaseUser
     Export:
       Name: !Join ['-', [!Ref Environment, 'grafana', 'database', 'user']]
+  GrafanaDBSecurityGroupID:
+    Value: !GetAtt 'GrafanaDBSecurityGroup.GroupId'
+    Export:
+      Name: !Join ['-', [!Ref 'Environment', 'grafana', 'database', 'sg', 'id']]
 
       

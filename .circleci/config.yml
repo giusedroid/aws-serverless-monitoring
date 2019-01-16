@@ -12,25 +12,29 @@ jobs:
           command: |
             sudo pip install awscli
 
-      # - run:
-      #     name: Deploy Security and Exports Stack
-      #     command: make security
+      - run:
+          name: Deploy Security and Exports Stack
+          command: make security
 
       - run:
           name: Deploy Aurora Backend
           command: make backend
+      
+      - run:
+          name: Deploy Aurora DNS Entries
+          command: make dns-aurora
 
-      # - run:
-      #     name: Deploy Grafana Service
-      #     command: make service
+      - run:
+          name: Deploy Grafana Service
+          command: make grafana
+
+      - run:
+          name: Deploy Grafana Service DNS Entries
+          command: make dns-grafana
 
       # - run:
       #     name: Deploy Timestream
       #     command: make timestream
-
-      # - run:
-      #     name: Deploy DNS Entries
-      #     command: make dns
       
       # - run:
       #     name: Integrity Test
