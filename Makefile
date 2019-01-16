@@ -58,7 +58,7 @@ grafana:
 	GrafanaServiceAdminPassword=$(GRAFANA_SERVICE_ADMIN_PASSWORD) \
 	GoogleAuthClientId=$(GOOGLE_AUTH_CLIENT_ID) \
 	GoogleAuthClientSecret=$(GOOGLE_AUTH_CLIENT_SECRET) \
-	GoogleAuthAllowedDomains=$(GOOGLE_AUTH_ALLOWED_DOMAINS) \
+	GoogleAuthAllowedDomains="$(GOOGLE_AUTH_ALLOWED_DOMAINS)" \
 	--no-fail-on-empty-changeset
 
 grafana-local:
