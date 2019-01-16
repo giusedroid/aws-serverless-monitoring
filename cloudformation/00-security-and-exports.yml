@@ -9,7 +9,7 @@ Parameters:
   
 
 Resources:
-  GrafanaDBSecurityGroup:
+  GrafanaServiceSG:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
       GroupDescription: !Sub 'Grafana database security group (${Environment})'
