@@ -1,0 +1,31 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: 'Grafana DB RecordSet'
+
+
+Parameters:
+  Environment:
+    Type: 'String'
+  HostedZoneId:
+    Type: 'String'
+  DomainName:
+    Type: 'String'
+
+Resources:
+  RecordSet:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Ref DomainName
+      Comment: !Sub "DNS name for Grafana DB - ${Environment}."
+      Type: CNAME
+      TTL: '900'
+      ResourceRecords:
+      - Fn::ImportValue: !Sub ${Environment}-grafana-service-aurora-backend-endpoint
+
+Outputs:
+  DNSName:
+    Value: !Ref 'RecordSet'
+    Export:
+      Name: !Join ['-', [!Ref 'Environment', 'grafana', 'db', 'domain']]

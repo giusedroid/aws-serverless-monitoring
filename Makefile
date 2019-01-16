@@ -21,8 +21,8 @@ backend:
 	--no-fail-on-empty-changeset
 
 backend-local:
-	source .secrets/GrafanaDatabasePassword
-	source .secrets/aws
+	. .secrets/GrafanaDatabasePassword
+	. .secrets/aws
 	echo "Deploying Aurora Serverless Backend from my machine"
 	@aws cloudformation deploy \
 	--template-file cloudformation/10-aurora-backend.yml \
@@ -48,7 +48,7 @@ grafana:
 	GrafanaImage=grafana/grafana:5.4.3 \
 	GrafanaServiceDomain=grafana-$(DEPLOY_ENV).$(GRAFANA_DOMAIN) \
 	GrafanaDatabaseEngine=mysql \
-	GrafanaSessionProviderString=grafanauser:$(GRAFANA_DATABASE_PASSWORD)\@tcp\(grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN):$(GRAFANA_DATABASE_PORT)\)/grafana \
+	GrafanaSessionProviderString=grafanauser:$(GRAFANA_DATABASE_PASSWORD)@tcp(grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN):$(GRAFANA_DATABASE_PORT))/grafana \
 	GrafanaDatabaseHost=grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN):$(GRAFANA_DATABASE_PORT) \
 	GrafanaDatabaseName=grafana \
 	GrafanaDatabaseUser=grafanauser \
@@ -61,8 +61,8 @@ grafana:
 	--no-fail-on-empty-changeset
 
 grafana-local:
-	source ./.secrets/aws
-	source ./.secrets/GrafanaService
+	. .secrets/aws
+	. .secrets/GrafanaService
 	echo "Deploying Grafana on ECS@Fargate from local machine"
 	aws cloudformation deploy \
 	--template-file cloudformation/20-grafana-ecs-service.yml \
@@ -74,7 +74,7 @@ grafana-local:
 	GrafanaImage=grafana/grafana:5.4.3 \
 	GrafanaServiceDomain=grafana-$(DEPLOY_ENV).$(GRAFANA_DOMAIN) \
 	GrafanaDatabaseEngine=mysql \
-	GrafanaSessionProviderString=grafanauser:$(GRAFANA_DATABASE_PASSWORD)\@tcp\(grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN):$(GRAFANA_DATABASE_PORT)\)/grafana \
+	GrafanaSessionProviderString=grafanauser:$(GRAFANA_DATABASE_PASSWORD)@tcp(grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN):$(GRAFANA_DATABASE_PORT))/grafana \
 	GrafanaDatabaseHost=grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN):$(GRAFANA_DATABASE_PORT) \
 	GrafanaDatabaseName=grafana \
 	GrafanaDatabaseUser=grafanauser \
@@ -85,3 +85,24 @@ grafana-local:
 	GoogleAuthClientSecret=$(GOOGLE_AUTH_CLIENT_SECRET) \
 	GoogleAuthAllowedDomains=$(GOOGLE_AUTH_ALLOWED_DOMAINS) \
 	--no-fail-on-empty-changeset
+
+dns-grafana:
+	echo "Deploying DNS Records for Grafana Service on $(DEPLOY_ENV)"
+	@aws cloudformation deploy \
+	--template-file cloudformation/21-dns-grafana.yml \
+	--parameter-overrides \
+	Environment=$(DEPLOY_ENV) \
+	HostedZoneId=$(GRAFANA_HOSTED_ZONE) \
+	DomainName=grafana-$(DEPLOY_ENV).$(GRAFANA_DOMAIN) \
+	--no-fail-on-empty-changeset
+
+dns-aurora:
+	echo "Deploying DNS Records for Aurora on $(DEPLOY_ENV)"
+	@aws cloudformation deploy \
+	--template-file cloudformation/11-dns-aurora.yml \
+	--parameter-overrides \
+	Environment=$(DEPLOY_ENV) \
+	HostedZoneId=$(GRAFANA_HOSTED_ZONE) \
+	DomainName=grafana-$(DEPLOY_ENV)-db.$(GRAFANA_DOMAIN) \
+	--no-fail-on-empty-changeset
+

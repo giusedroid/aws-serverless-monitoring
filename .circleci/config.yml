@@ -19,10 +19,18 @@ jobs:
       - run:
           name: Deploy Aurora Backend
           command: make backend
+      
+      - run:
+          name: Deploy Aurora DNS Entries
+          command: make dns-aurora
 
       # - run:
       #     name: Deploy Grafana Service
       #     command: make grafana
+
+      # - run:
+      #     name: Deploy Grafana Service DNS Entries
+      #     command: make dns-grafana
 
       # - run:
       #     name: Deploy Timestream
