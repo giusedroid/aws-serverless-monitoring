@@ -39,6 +39,7 @@ backend-local:
 grafana:
 	echo "Deploying Grafana on ECS@Fargate to $(DEPLOY_ENV)"
 	@aws cloudformation deploy \
+	--stack-name $(DEPLOY_ENV)-grafana-service \
 	--template-file cloudformation/20-grafana-ecs-service.yml \
 	--capabilities CAPABILITY_NAMED_IAM \
 	--parameter-overrides \
@@ -65,6 +66,7 @@ grafana-local:
 	. .secrets/GrafanaService
 	echo "Deploying Grafana on ECS@Fargate from local machine"
 	aws cloudformation deploy \
+	--stack-name $(DEPLOY_ENV)-grafana-service \
 	--template-file cloudformation/20-grafana-ecs-service.yml \
 	--capabilities CAPABILITY_NAMED_IAM \
 	--parameter-overrides \
@@ -89,6 +91,7 @@ grafana-local:
 dns-grafana:
 	echo "Deploying DNS Records for Grafana Service on $(DEPLOY_ENV)"
 	@aws cloudformation deploy \
+	--stack-name $(DEPLOY_ENV)-grafana-service-dns \
 	--template-file cloudformation/21-dns-grafana.yml \
 	--parameter-overrides \
 	Environment=$(DEPLOY_ENV) \
@@ -99,6 +102,7 @@ dns-grafana:
 dns-aurora:
 	echo "Deploying DNS Records for Aurora on $(DEPLOY_ENV)"
 	@aws cloudformation deploy \
+	--stack-name $(DEPLOY_ENV)-grafana-db-dns \
 	--template-file cloudformation/11-dns-aurora.yml \
 	--parameter-overrides \
 	Environment=$(DEPLOY_ENV) \
