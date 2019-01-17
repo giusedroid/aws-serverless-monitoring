@@ -125,3 +125,9 @@ The following table lists the exported value when `cloudformation/21-dns-grafana
 | Name | Description | Example |
 |------|-------------|---------|
 | ${Environment}-grafana-service-domain | The URL pointing to your installation of Grafana | grafana.appmod.aws.crlabs.cloud |
+
+## Sample Dashboards
+
+Sample Dashboards can be found in the `samples/` folder.  
+Don't forget you can find many more at [Grafana.com](https://grafana.com)  
+Please refer to [Grafana Docs](http://docs.grafana.org/reference/export_import/) to import dashboards.  
