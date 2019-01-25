@@ -12,7 +12,7 @@ You can use Google OAuth to authenticate your users :)
 
 ### Architecture
 
-<img src="assets/architecture.png" width="800"/>
+<img src="https://raw.githubusercontent.com/giusedroid/aws-serverless-monitoring/master/assets/architecture.png" width="800"/>
 
 ### CloudFormation Stacks
 
