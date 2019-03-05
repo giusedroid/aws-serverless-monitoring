@@ -249,6 +249,10 @@ Resources:
             # SNAPSHOTS
             - Name: 'GF_SNAPSHOTS_EXTERNAL_ENABLED'
               Value: 'false'
+            
+            # PLUGINS
+            - Name: 'GF_INSTALL_PLUGINS'
+              Value: 'grafana-azure-monitor-datasource'
 
           PortMappings:
             - ContainerPort: 3000
